@@ -14,6 +14,7 @@
           <node kind="schema">
             <name qname="@" />
             <name qname="cmsblog" />
+            <name qname="cmsblogS" />
           </node>
         </introspection-scope>
       </schema-mapping>

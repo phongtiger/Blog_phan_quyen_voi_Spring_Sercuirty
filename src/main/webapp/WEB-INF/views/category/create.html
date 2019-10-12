@@ -7,12 +7,12 @@
 <body>
 <h1>Create category</h1>
 <p>
-    <a href="/categories">Category list</a>
+    <a href="/category/categories">Category list</a>
 </p>
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
 </th:block>
-<form th:action="@{/create-category}" th:object="${category}" method="post">
+<form th:action="@{/category/create-category}" th:object="${category}" method="post">
     <table>
         <tr>
             <td>Name:</td>

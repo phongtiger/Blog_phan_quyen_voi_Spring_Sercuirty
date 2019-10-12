@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/blog")
 public class BlogController {
     @Autowired
     private BlogService blogService;
@@ -39,7 +40,7 @@ public class BlogController {
         return modelAndView;
     }
 
-    @GetMapping("/blogs")
+    @GetMapping("/")
     public ModelAndView listBlogs(@RequestParam("s") Optional<String> s, Pageable pageable){
         Page<Blog> blogs;
         if(s.isPresent()){

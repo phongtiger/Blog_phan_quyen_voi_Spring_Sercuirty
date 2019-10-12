@@ -8,9 +8,9 @@
 <h1>Delete category</h1>
 <h2>Are you sure?</h2>
 <p>
-    <a href="/categories">Category list</a>
+    <a href="/category/categories">Category list</a>
 </p>
-<form th:action="@{/delete-category}" th:object="${category}" method="post">
+<form th:action="@{/category/delete-category}" th:object="${category}" method="post">
     <input th:type="hidden" name="id" th:field="*{id}">
     <table>
         <tr>
