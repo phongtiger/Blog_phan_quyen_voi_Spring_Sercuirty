@@ -7,6 +7,7 @@
 <body>
 <a href="/blog/create-blog">Create new blog</a><br/><br/>
 <a href="/category/categories"> Category List</a>
+<h3> Dear <span th:text="${user}"></span> Welcome to Page</h3>
 <h1>Blog</h1>
 <form>
     Search by tittle:
@@ -32,6 +33,7 @@
             <td th:text="${blog.tittle}"></td>
             <td th:text="${blog.content}"></td>
             <td th:text="${blog.category?.name}"></td>
+            <td th:text="${blog.image}"></td>
             <td><a th:href="@{/blog/edit-blog/__${blog.id}__ }">Edit</a></td>
             <td><a th:href="@{/blog/delete-blog/__${blog.id}__ }">Delete</a></td>
         </tr>
@@ -45,5 +47,6 @@
 <br/>
 <a href="/blog/">Blog List</a><br/><br/>
 <a href="/home">Home List</a><br/><br/>
+<a href="/logout">Logout</a><br/><br/>
 </body>
 </html>

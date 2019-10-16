@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,7 +42,7 @@ public class BlogController {
     }
 
     @GetMapping("/")
-    public ModelAndView listBlogs(@RequestParam("s") Optional<String> s, Pageable pageable){
+    public ModelAndView listBlogs(@RequestParam("s") Optional<String> s, Pageable pageable, Model model){
         Page<Blog> blogs;
         if(s.isPresent()){
             blogs = blogService.findAllByTittleContaining(s.get(), pageable);
@@ -49,6 +50,7 @@ public class BlogController {
             blogs = blogService.findAll(pageable);
         }
         ModelAndView modelAndView = new ModelAndView("/blog/list");
+        model.addAttribute("user", UserController.getPrincipal());
         modelAndView.addObject("blogs", blogs);
         modelAndView.addObject("blog", new Blog());
         return modelAndView;

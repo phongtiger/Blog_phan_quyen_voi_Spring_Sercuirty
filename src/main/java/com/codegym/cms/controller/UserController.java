@@ -8,13 +8,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.WebParam;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -24,8 +27,20 @@ public class UserController {
     private BlogService blogService;
     @Autowired
     private CategoryService categoryService;
+    public static String getPrincipal(){
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails)principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
+
     @GetMapping("/home")
-    public ModelAndView listBlogs(@RequestParam("s") Optional<String> s, Pageable pageable){
+    public ModelAndView listBlogs(@RequestParam("s") Optional<String> s, Pageable pageable, Model model){
         Page<Blog> blogs;
         if(s.isPresent()){
             blogs = blogService.findAllByTittleContaining(s.get(), pageable);
@@ -33,6 +48,7 @@ public class UserController {
             blogs = blogService.findAll(pageable);
         }
         ModelAndView modelAndView = new ModelAndView("/index");
+        model.addAttribute("user", getPrincipal());
         modelAndView.addObject("blogs", blogs);
         modelAndView.addObject("blog", new Blog());
         modelAndView.addObject("categories",categoryService.findAll());

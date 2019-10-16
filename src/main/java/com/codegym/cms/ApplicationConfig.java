@@ -1,5 +1,6 @@
 package com.codegym.cms;
 
+import com.codegym.cms.controller.UserController;
 import com.codegym.cms.formatter.ProvinceFormatter;
 import com.codegym.cms.service.BlogService;
 import com.codegym.cms.service.CategoryService;
@@ -111,7 +112,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/cmsblogS");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/cmsblog2");
         dataSource.setUsername( "root" );
         dataSource.setPassword( "123456" );
         return dataSource;
